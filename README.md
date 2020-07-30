@@ -27,5 +27,7 @@ One petStore project
 
 ##### 实体类UML:
 
+![image-20200730211348979](C:\Users\DC\AppData\Roaming\Typora\typora-user-images\image-20200730211348979.png)
+
 ​	
 
