@@ -57,4 +57,20 @@ public class CartServiceImpl implements CartService{
 
         cartRepository.save(cartEO);
     }
+
+    @Override
+    public void payCart(String userName) {
+        CartEO cartEO = cartRepository.findByName(userName);
+        if(cartEO.getCartItemEOList().size() > 0){
+            cartEO.getCartItemEOList().stream().forEach(cartItemEO -> {
+                cartItemEO.setPayed(true);
+            });
+        }
+        cartRepository.save(cartEO);
+    }
+
+    @Override
+    public CartEO listCart(String userName) {
+        return cartRepository.findByName(userName);
+    }
 }

@@ -1,5 +1,6 @@
 package com.gordon.petStore.service;
 
+import com.gordon.petStore.model.CartEO;
 import com.gordon.petStore.request.CartRequest;
 
 /**
@@ -12,4 +13,8 @@ public interface CartService {
     void initCart(String userName);
 
     void addCart(CartRequest cartRequest);
+
+    void payCart(String userName);
+
+    CartEO listCart(String userName);
 }
