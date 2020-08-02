@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+import sun.management.snmp.jvminstr.JvmOSImpl;
 import sun.management.snmp.jvmmib.JVM_MANAGEMENT_MIBOidTable;
 
 import javax.transaction.Transactional;
@@ -27,4 +28,6 @@ public interface PetRepository extends JpaRepository<PetEO,Integer> {
     void updatePet(@Param("price") double price,@Param("name") String name);
 
     void deleteByName(String name);
+
+    List<PetEO> findAllByCategory_NameEquals(String category);
 }

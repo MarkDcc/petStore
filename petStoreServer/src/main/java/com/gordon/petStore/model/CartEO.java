@@ -22,15 +22,11 @@ public class CartEO {
     @Column
     private String name;
 
-    @Temporal(TemporalType.TIMESTAMP)
-    @Column
-    private Date date;
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_id")
+    private UserEO userEO;
 
-    @Column
-    private Boolean payed;
-
-    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
-    @JoinColumn(name = "cartItem_id")
+    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER,mappedBy = "cart")
     private List<CartItemEO> cartItemEOList = new ArrayList<>();
 
     public CartEO() {
@@ -38,25 +34,24 @@ public class CartEO {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         CartEO cartEO = (CartEO) o;
         return Objects.equals(getId(), cartEO.getId()) &&
-                Objects.equals(getName(), cartEO.getName()) &&
-                Objects.equals(getDate(), cartEO.getDate()) &&
-                Objects.equals(getPayed(), cartEO.getPayed()) &&
-                Objects.equals(getCartItemEOList(), cartEO.getCartItemEOList());
+                Objects.equals(getName(), cartEO.getName());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getName(), getDate(), getPayed(), getCartItemEOList());
+        return Objects.hash(getId(), getName());
     }
 
     public CartEO(String name, Date date, Boolean payed) {
         this.name = name;
-        this.date = date;
-        this.payed = payed;
     }
 
     public Integer getId() {
@@ -73,22 +68,6 @@ public class CartEO {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public Date getDate() {
-        return date;
-    }
-
-    public void setDate(Date date) {
-        this.date = date;
-    }
-
-    public Boolean getPayed() {
-        return payed;
-    }
-
-    public void setPayed(Boolean payed) {
-        this.payed = payed;
     }
 
     public List<CartItemEO> getCartItemEOList() {

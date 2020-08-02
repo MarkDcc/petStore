@@ -19,17 +19,19 @@ public class UserEO {
     private Integer id;
 
     @Column
-    private String login;
+    private String name;
 
     @Column
     private String password;
 
     @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "cart_id")
     private List<CartEO> cartEOList = new ArrayList<>();
 
+    public UserEO() {
+    }
+
     public UserEO(String login, String password) {
-        this.login = login;
+        this.name = login;
         this.password = password;
     }
 
@@ -39,14 +41,12 @@ public class UserEO {
         if (o == null || getClass() != o.getClass()) return false;
         UserEO userEO = (UserEO) o;
         return Objects.equals(getId(), userEO.getId()) &&
-                Objects.equals(getLogin(), userEO.getLogin()) &&
-                Objects.equals(getPassword(), userEO.getPassword()) &&
-                Objects.equals(getCartEOList(), userEO.getCartEOList());
+                Objects.equals(getName(), userEO.getName());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getLogin(), getPassword(), getCartEOList());
+        return Objects.hash(getId(), getName());
     }
 
     public Integer getId() {
@@ -57,12 +57,12 @@ public class UserEO {
         this.id = id;
     }
 
-    public String getLogin() {
-        return login;
+    public String getName() {
+        return name;
     }
 
-    public void setLogin(String login) {
-        this.login = login;
+    public void setName(String login) {
+        this.name = login;
     }
 
     public String getPassword() {

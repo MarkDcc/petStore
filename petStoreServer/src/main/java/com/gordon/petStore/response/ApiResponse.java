@@ -9,10 +9,12 @@ import javax.persistence.criteria.CriteriaBuilder;
  */
 public class ApiResponse {
 
+    //TODO 增加时间，路径参数，请求参数等信息
 
     private String message;
 
     private String status;
+
 
     public ApiResponse() {
     }

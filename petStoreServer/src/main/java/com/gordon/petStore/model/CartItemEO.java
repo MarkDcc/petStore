@@ -2,6 +2,8 @@ package com.gordon.petStore.model;
 
 import javax.persistence.*;
 import javax.persistence.criteria.CriteriaBuilder;
+import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -29,12 +31,51 @@ public class CartItemEO {
     @Column
     private double price;
 
-    public CartItemEO(String petName, String petCategoryName, Integer count, double price) {
+    @Column
+    private Boolean payed;
+
+    @Column
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date date;
+
+    @ManyToOne
+    @JoinColumn(name = "cart_id")
+    private CartEO cart;
+
+    public Boolean getPayed() {
+        return payed;
+    }
+
+    public void setPayed(Boolean payed) {
+        this.payed = payed;
+    }
+
+    public CartEO getCart() {
+        return cart;
+    }
+
+    public void setCart(CartEO cart) {
+        this.cart = cart;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+    public CartItemEO(String petName, String petCategoryName, Integer count, double price, Boolean payed, Date date, CartEO cart) {
         this.petName = petName;
         this.petCategoryName = petCategoryName;
         this.count = count;
         this.price = price;
+        this.payed = payed;
+        this.date = date;
+        this.cart = cart;
     }
+
 
     public CartItemEO() {
     }
@@ -48,12 +89,15 @@ public class CartItemEO {
                 Objects.equals(getId(), that.getId()) &&
                 Objects.equals(getPetName(), that.getPetName()) &&
                 Objects.equals(getPetCategoryName(), that.getPetCategoryName()) &&
-                Objects.equals(getCount(), that.getCount());
+                Objects.equals(getCount(), that.getCount()) &&
+                Objects.equals(getPayed(), that.getPayed()) &&
+                Objects.equals(getDate(), that.getDate()) &&
+                Objects.equals(getCart(), that.getCart());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getPetName(), getPetCategoryName(), getCount(), getPrice());
+        return Objects.hash(getId(), getPetName(), getPetCategoryName(), getCount(), getPrice(), getPayed(), getDate(), getCart());
     }
 
     public Integer getId() {

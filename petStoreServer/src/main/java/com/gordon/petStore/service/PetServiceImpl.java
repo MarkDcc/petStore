@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.List;
 
 /**
  * @author dongchen
@@ -61,5 +62,11 @@ public class PetServiceImpl implements PetService {
         }
         petRepository.deleteByName(petRequest.getName());
 
+    }
+
+    @Override
+    public List<PetEO> listPet(String category) {
+
+        return petRepository.findAllByCategory_NameEquals(category);
     }
 }

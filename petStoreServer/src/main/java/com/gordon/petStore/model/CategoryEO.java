@@ -24,11 +24,9 @@ public class CategoryEO {
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "parent_id")
-    @JsonIgnoreProperties("subCategoryEO")
     private CategoryEO parent;
 
     @OneToMany(fetch = FetchType.EAGER,mappedBy = "parent")
-    @JsonIgnoreProperties("parent")
     private Set<CategoryEO> subCategoryEO = new HashSet<>();
 
     @OneToMany(fetch = FetchType.EAGER,mappedBy = "category")
